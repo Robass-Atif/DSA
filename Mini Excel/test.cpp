@@ -1,25 +1,37 @@
-#include<iostream>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 
-bool isPowerofBase(int n,int b)
+void countingSort(vector<int> &arr)
 {
-    if(n==1)
+    int max = *max_element(arr.begin(), arr.end());
+    //  int min = *min_element(arr.begin(), arr.end());
+    vector<int> count(max + 1, 0);
+    vector<int> output(arr.size(), 0);
+    for (int i = 0; i < arr.size(); i++)
     {
-        return true;
+        count[arr[i]]++;
     }
-    else
+    for (int i = 1; i < count.size(); i++)
     {
-        int temp=n/b;
-        int ret=n%b;
-        if(ret!=0)
-        {
-            return false;
-        }
-        return isPowerofBase(temp,b);
+        count[i] = count[i - 1] + count[i];
+    }
+    for (int i = arr.size()-1; i >= 0; i--)
+    {
+        output[--count[arr[i]]] = arr[i];
+    }
+    for (int i = 0; i < arr.size(); i++)
+    {
+        arr[i] = output[i];
     }
 }
 main()
 {
-bool result=isPowerofBase(3,8);
-cout<<result;
+    vector<int> v = {1, 3, 2, 8, 5, 1, 2, 7};
+    countingSort(v);
+    for (int i = 0; i < v.size(); i++)
+    {
+        cout << v[i] << " ";
+    }
 }
