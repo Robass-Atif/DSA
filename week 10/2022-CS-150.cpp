@@ -256,11 +256,47 @@ public:
             return x+y;
         }
     }
-    // idential trees function
+    // idential trees function and their values
+    
+    bool identicalBTree(node *temp1,node *temp2)
+    {
+        
+        if(temp1!=NULL && temp2!=NULL)
+        {
+            return false;
+        }
+        
+        if(temp1->data!=temp2->data)
+        {
+            return false;
+        }
+        bool x=identicalBTree(temp1->left,temp2->left);
+        bool y=identicalBTree(temp1->right,temp2->right);
+        if(x==true && y==true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     
 
 
 };
+void BSTSort(int arr[],int n)
+{
+    BST<> b;
+    for(int i=0;i<n;i++)
+    {
+        b.insertBST(arr[i]);
+    }
+    b.inorder();   
+}
+
+
 // main function
 int main()
 {
