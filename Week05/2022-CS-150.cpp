@@ -270,9 +270,15 @@ int fib(int n, int arr[])
 }
 int fibFast(int n)
 {
-    int arr[n + 1] = {-1};
+    int arr[n + 1] ;
+
+    for(int i=0;i<n+1;i++)
+    {
+        arr[i]=-1;
+    }
     arr[0] = 0;
     arr[1] = 1;
+    arr[2]=1;
     return fib(n, arr);
 }
 
@@ -284,6 +290,7 @@ int fibonacci_bottom_up(int n)
 
     arr[0] = 0;
     arr[1] = 1;
+    arr[2]=1;
 
     for (int i = 2; i <= n; i++)
     {
@@ -329,10 +336,15 @@ int fib3(int n, int arr[])
 
 int fibTri(int n)
 {
-    int arr[n + 1] = {-1};
+    int size= n+1;
+    int arr[size];
+    for (int i = 0; i < size; i++)
+    {
+        arr[i] = -1;
+    }
     arr[0] = 0;
     arr[1] = 1;
-    arr[1] = 2;
+    arr[2] = 2;
     return fib3(n, arr);
 }
 // chalenge 1
@@ -400,17 +412,16 @@ int Mul2(int x, int y)
     {
         return 0;
     }
-int product=0;
-    if(y%2==0)
+    if (y % 2 == 0)
     {
-        product=add(x+(y/2),y/2);
+        return Mul2(x, y / 2) + Mul2(x, y / 2);
     }
-    if(y%2==1) 
+    else
     {
-        product=add(x+x,(y-1)/2);
+        return x + Mul2(x, y / 2) + Mul2(x, y / 2);
     }
-    return x+ product;
 }
+
 // Memorization
 vector<int> memo(  1, -1);
 
@@ -435,6 +446,23 @@ int Mul3(int x, int y) {
 
 int main(int argc, char const *argv[])
 {
-    cout << Mul2(2, 12);
+    cout<<sum(5)<<endl;
+    cout<<sumofOdd(5)<<endl;
+    cout<<sumofGM(5)<<endl;
+    cout<<sumofGM3(5)<<endl;
+    cout<<sumofGP(5)<<endl;
+    
+    cout<<decimalTOBinary(5)<<endl;
+    cout<<itoa(5)<<endl;
+    cout<<gcd(5,5)<<endl;
+    cout<<Mul(5,5)<<endl;
+    cout<<Mul2(5,5)<<endl;
+    cout<<fibonacci_bottom_up(15)<<endl;
+    cout<<fibFast(15)<<endl;
+    cout<<fibTri(15)<<endl;
+    cout<<iterativeFibonacci(15)<<endl;
+    cout<<recursiveFibonacci(15)<<endl;
+    
+    
     return 0;
 }

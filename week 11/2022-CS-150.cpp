@@ -5,8 +5,7 @@
 #include <ctime>
 #include <algorithm>
 #include <fstream>
-
-
+#include<chrono>
 
 using namespace std;
 class compare
@@ -22,7 +21,7 @@ void RandomArray(vector<int> &arr)
 {
     for (int i = 0; i < arr.size(); i++)
     {
-        arr[i]=rand() % 100;
+        arr[i] = rand() % 100;
     }
 }
 void print(vector<int> &arr)
@@ -31,7 +30,9 @@ void print(vector<int> &arr)
     {
         cout << arr[i] << " ";
     }
-    cout << endl<<endl<<endl;
+    cout << endl
+         << endl
+         << endl;
 }
 
 // heap sort
@@ -52,7 +53,7 @@ void heapSort(vector<int> &V)
 }
 
 // buble sort
-template <typename T=int>
+template <typename T = int>
 void bubbleSort(vector<T> &V)
 {
     for (int i = 0; i < V.size(); i++)
@@ -67,7 +68,7 @@ void bubbleSort(vector<T> &V)
     }
 }
 // selection sort
-template <typename T=int>
+template <typename T = int>
 void selectionSort(vector<T> &V)
 {
     for (int i = 0; i < V.size(); i++)
@@ -78,7 +79,7 @@ void selectionSort(vector<T> &V)
     }
 }
 // Quick Sort
-template <typename T=int>
+template <typename T = int>
 int partition(vector<T> &V, int start, int end)
 {
     int pivot = V[end];
@@ -94,7 +95,7 @@ int partition(vector<T> &V, int start, int end)
     swap(V[partitionIndex], V[end]);
     return partitionIndex;
 }
-template <typename T=int>
+template <typename T = int>
 void quickSort(vector<T> &V, int start, int end)
 {
     if (start < end)
@@ -109,7 +110,7 @@ void CreateRandomFile(string fn, int size, int Rn = 100)
 {
     srand(time(0));
     ofstream Writer(fn);
-    for (int i = 0; i < size * 1024 ; i++)
+    for (int i = 0; i < size * 1024; i++)
     {
         Writer << rand() % Rn << " ";
     }
@@ -140,52 +141,49 @@ int main()
     // print(arr);
     // return 0;
 
-
-
-    cout<< "Creating Random File"<<endl;
-    //one GB
-    CreateRandomFile("1GB.txt", 1024*500);
+    cout << "Creating Random File" << endl;
+    // one GB
+  //  CreateRandomFile("1GB.txt", 1024 * 200);
     // heap sort
+    cout << time(0)<<endl;
     cout << "Heap Sort" << endl;
     vector<int> arr;
     loadData("1GB.txt", arr);
-    clock_t start = clock();
+
     heapSort(arr);
-    clock_t end = clock();
-    cout << "Time: " << (double)(end - start) / CLOCKS_PER_SEC << endl;
+    cout << time(0)<<endl;
+
     arr.clear();
     // quick sort
     cout << "Quick Sort" << endl;
     loadData("1GB.txt", arr);
-    start = clock();
+    cout << time(0)<<endl;
+
     quickSort(arr, 0, arr.size() - 1);
-    end = clock();
-    cout << "Time: " << (double)(end - start) / CLOCKS_PER_SEC << endl;
+
+    cout << "Time: " << time(0)<<endl;
     // for n^2 algorithms file of two mb is created
     cout << "Creating Random File" << endl;
-    CreateRandomFile("2MB.txt", 200);
-    
+    CreateRandomFile("2MB.txt", 100);
+
     arr.clear();
     // bubble sort
     cout << "Bubble Sort" << endl;
     loadData("2MB.txt", arr);
-    start = clock();
+    cout << time(0)<<endl;
     bubbleSort(arr);
-    end = clock();
-    cout << "Time: " << (double)(end - start) / CLOCKS_PER_SEC << endl;
+
+    cout << "Time: " << time(0)<<endl;
     // selection sort
     arr.clear();
     cout << "Selection Sort" << endl;
     loadData("2MB.txt", arr);
-    start = clock();
+    cout << time(0) << endl;
     selectionSort(arr);
-    end = clock();
-    cout << "Time: " << (double)(end - start) / CLOCKS_PER_SEC << endl;
+
+    cout << "Time: " << time(0);
     return 0;
-
-
 }
-
 
 // int main()
 // {
