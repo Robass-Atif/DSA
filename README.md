@@ -40,9 +40,6 @@ DOS Shell is a simple command-line interface (CLI) inspired by the MS-DOS prompt
 2. Navigate to the DOS Shell project: `cd dos-shell`
 3. Follow the instructions in the project's README file to set up and run the command-line interface.
 
-## Contributing
-
-If you'd like to contribute to the improvement of these projects or add new features, please follow the guidelines outlined in the `CONTRIBUTING.md` file.
 
 ## License
 
