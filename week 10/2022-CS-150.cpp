@@ -327,9 +327,24 @@ public:
             insertRandom(temp->right,v1);
         }
     }
+// output tree function
+void outputTree(node* root, int level)
+{
+    if (root == NULL)
+        return;
 
+    outputTree(root->right, level + 1);
+
+    for (int i = 0; i < level; i++)
+        cout << "   ";
+
+    cout << root->data << endl;
+
+    outputTree(root->left, level + 1);
+}
     
 };
+// binary search tree sort function using insertion
 void BSTSort(int arr[], int n)
 {
     BST<> b;
@@ -339,6 +354,9 @@ void BSTSort(int arr[], int n)
     }
     b.inorder();
 }
+
+
+
 
 // main function
 int main()

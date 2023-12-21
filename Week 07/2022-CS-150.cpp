@@ -218,7 +218,7 @@ general_iterator rbegin()
         {
             curr.temp->next = other.head;
             other.head->pre = curr.temp;
-            tail = other.tail;
+            other.tail->next = curr.temp->next;
         }
     }
 };
@@ -262,31 +262,31 @@ main()
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution
-{
-public:
-    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
-    {
-        if (list1 == NULL)
-        {
-            return list2;
-        }
-        if (list2 == NULL)
-        {
-            return list1;
-        }
-        if (list1->val <= list2->val)
-        {
-            list1->next = mergeTwoLists(list1->next, list2);
-            return list1;
-        }
-        else
-        {
-            list2->next = mergeTwoLists(list1, list2->next);
-            return list2;
-        }
-    }
-};
+// class Solution
+// {
+// public:
+//     ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+//     {
+//         if (list1 == NULL)
+//         {
+//             return list2;
+//         }
+//         if (list2 == NULL)
+//         {
+//             return list1;
+//         }
+//         if (list1->val <= list2->val)
+//         {
+//             list1->next = mergeTwoLists(list1->next, list2);
+//             return list1;
+//         }
+//         else
+//         {
+//             list2->next = mergeTwoLists(list1, list2->next);
+//             return list2;
+//         }
+//     }
+// };
 // second problem
 /**
  * Definition for singly-linked list.
@@ -308,262 +308,262 @@ public:
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution
-{
-public:
-    ListNode *removeNthFromEnd(ListNode *head, int n)
-    {
-        ListNode *temp = new ListNode(100);
-        temp->next = head;
-        ListNode *left = temp;
-        ListNode *right = temp;
-        for (int i = 1; i <= n + 1; i++)
-        {
-            right = right->next;
-        }
-        if (right == NULL)
-        {
-            return head->next;
-        }
-        while (right != NULL)
-        {
+// class Solution
+// {
+// public:
+//     ListNode *removeNthFromEnd(ListNode *head, int n)
+//     {
+//         ListNode *temp = new ListNode(100);
+//         temp->next = head;
+//         ListNode *left = temp;
+//         ListNode *right = temp;
+//         for (int i = 1; i <= n + 1; i++)
+//         {
+//             right = right->next;
+//         }
+//         if (right == NULL)
+//         {
+//             return head->next;
+//         }
+//         while (right != NULL)
+//         {
 
-            right = right->next;
+//             right = right->next;
 
-            left = left->next;
-        }
-        left->next = left->next->next;
+//             left = left->next;
+//         }
+//         left->next = left->next->next;
 
-        return head;
-    }
-};
+//         return head;
+//     }
+// };
 
-// leetcode problem three
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution
-{
-public:
-    ListNode *swapPairs(ListNode *head)
-    {
-        ListNode *temp = new ListNode(0);
-        temp->next = head;
-        swap(temp);
-        return temp->next;
-    }
+// // leetcode problem three
+// /**
+//  * Definition for singly-linked list.
+//  * struct ListNode {
+//  *     int val;
+//  *     ListNode *next;
+//  *     ListNode() : val(0), next(nullptr) {}
+//  *     ListNode(int x) : val(x), next(nullptr) {}
+//  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+//  * };
+//  */
+// class Solution
+// {
+// public:
+//     ListNode *swapPairs(ListNode *head)
+//     {
+//         ListNode *temp = new ListNode(0);
+//         temp->next = head;
+//         swap(temp);
+//         return temp->next;
+//     }
 
-    void swap(ListNode *temp)
-    {
-        if (temp == NULL)
-        {
-            return;
-        }
+//     void swap(ListNode *temp)
+//     {
+//         if (temp == NULL)
+//         {
+//             return;
+//         }
 
-        ListNode *left = temp->next;
-        ListNode *right = NULL;
-        if (left != NULL)
-        {
-            right = left->next;
-        }
+//         ListNode *left = temp->next;
+//         ListNode *right = NULL;
+//         if (left != NULL)
+//         {
+//             right = left->next;
+//         }
 
-        if (right != NULL)
-        {
-            ListNode *temporary = right->next;
-            right->next = left;
-            temp->next = right;
-            left->next = temporary;
+//         if (right != NULL)
+//         {
+//             ListNode *temporary = right->next;
+//             right->next = left;
+//             temp->next = right;
+//             left->next = temporary;
 
-            swap(left);
-        }
-    }
-};
-// leetcode problem four
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
-class Solution
-{
-public:
-    ListNode *reverseBetween(ListNode *head, int left, int right)
-    {
-        ListNode *prev = NULL;
-        ListNode *curr = head;
-        for (int i = 1; i < left; i++)
-        {
-            prev = curr;
-            curr = curr->next;
-        }
-        ListNode *start = prev;
-        ListNode *end = curr;
-        for (int i = left; i <= right; i++)
-        {
-            ListNode *next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        if (start != NULL)
-        {
-            start->next = prev;
-        }
-        else
-        {
-            head = prev;
-        }
-        end->next = curr;
-        return head;
-    }
-};
+//             swap(left);
+//         }
+//     }
+// };
+// // leetcode problem four
+// /**
+//  * Definition for singly-linked list.
+//  * struct ListNode {
+//  *     int val;
+//  *     ListNode *next;
+//  *     ListNode() : val(0), next(nullptr) {}
+//  *     ListNode(int x) : val(x), next(nullptr) {}
+//  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+//  * };
+//  */
+// class Solution
+// {
+// public:
+//     ListNode *reverseBetween(ListNode *head, int left, int right)
+//     {
+//         ListNode *prev = NULL;
+//         ListNode *curr = head;
+//         for (int i = 1; i < left; i++)
+//         {
+//             prev = curr;
+//             curr = curr->next;
+//         }
+//         ListNode *start = prev;
+//         ListNode *end = curr;
+//         for (int i = left; i <= right; i++)
+//         {
+//             ListNode *next = curr->next;
+//             curr->next = prev;
+//             prev = curr;
+//             curr = next;
+//         }
+//         if (start != NULL)
+//         {
+//             start->next = prev;
+//         }
+//         else
+//         {
+//             head = prev;
+//         }
+//         end->next = curr;
+//         return head;
+//     }
+// };
 
-// leetcode problem five
-class node
-{
-public:
-    int val;
-    node *next;
+// // leetcode problem five
+// class node
+// {
+// public:
+//     int val;
+//     node *next;
 
-    node(int data)
-    {
-        this->val = data;
-        this->next = NULL;
-    }
-};
+//     node(int data)
+//     {
+//         this->val = data;
+//         this->next = NULL;
+//     }
+// };
 
-class MyLinkedList
-{
-public:
-    node *head;
-    int size = 0;
-    MyLinkedList()
-    {
-        head = NULL;
-    }
+// class MyLinkedList
+// {
+// public:
+//     node *head;
+//     int size = 0;
+//     MyLinkedList()
+//     {
+//         head = NULL;
+//     }
 
-    int get(int index)
-    {
-        node *temp = head;
-        int i = 0;
-        while (temp != NULL && i < index)
-        {
-            temp = temp->next;
-            i++;
-        }
-        if (temp == NULL)
-            return -1;
-        return temp->val;
-    }
+//     int get(int index)
+//     {
+//         node *temp = head;
+//         int i = 0;
+//         while (temp != NULL && i < index)
+//         {
+//             temp = temp->next;
+//             i++;
+//         }
+//         if (temp == NULL)
+//             return -1;
+//         return temp->val;
+//     }
 
-    void addAtHead(int val)
-    {
-        node *newh = new node(val);
-        if (head == NULL)
-        {
-            head = newh;
-            size++;
-        }
-        else
-        {
-            newh->next = head;
-            head = newh;
-            size++;
-        }
-    }
+//     void addAtHead(int val)
+//     {
+//         node *newh = new node(val);
+//         if (head == NULL)
+//         {
+//             head = newh;
+//             size++;
+//         }
+//         else
+//         {
+//             newh->next = head;
+//             head = newh;
+//             size++;
+//         }
+//     }
 
-    void addAtTail(int val)
-    {
-        node *newt = new node(val);
-        if (head == NULL)
-        {
-            head = newt;
-            size++;
-        }
-        else
-        {
-            node *t = head;
-            while (t->next != NULL)
-            {
-                t = t->next;
-            }
-            t->next = newt;
-        }
-    }
+//     void addAtTail(int val)
+//     {
+//         node *newt = new node(val);
+//         if (head == NULL)
+//         {
+//             head = newt;
+//             size++;
+//         }
+//         else
+//         {
+//             node *t = head;
+//             while (t->next != NULL)
+//             {
+//                 t = t->next;
+//             }
+//             t->next = newt;
+//         }
+//     }
 
-    void addAtIndex(int index, int val)
-    {
-        node *newn = new node(val);
-        if (index == 0)
-        {
-            newn->next = head;
-            head = newn;
-        }
-        else
-        {
-            node *temp = head;
-            int i = 0;
-            while (temp != NULL && i < index - 1)
-            {
-                temp = temp->next;
-                i++;
-            }
-            if (temp == NULL)
-                return;
-            if (temp != NULL && temp->next == NULL)
-            {
-                temp->next = newn;
-            }
-            if (i == index - 1)
-            {
-                node *t = temp->next;
-                temp->next = newn;
-                newn->next = t;
-            }
-        }
-    }
+//     void addAtIndex(int index, int val)
+//     {
+//         node *newn = new node(val);
+//         if (index == 0)
+//         {
+//             newn->next = head;
+//             head = newn;
+//         }
+//         else
+//         {
+//             node *temp = head;
+//             int i = 0;
+//             while (temp != NULL && i < index - 1)
+//             {
+//                 temp = temp->next;
+//                 i++;
+//             }
+//             if (temp == NULL)
+//                 return;
+//             if (temp != NULL && temp->next == NULL)
+//             {
+//                 temp->next = newn;
+//             }
+//             if (i == index - 1)
+//             {
+//                 node *t = temp->next;
+//                 temp->next = newn;
+//                 newn->next = t;
+//             }
+//         }
+//     }
 
-    void deleteAtIndex(int index)
-    {
-        if (index == 0)
-        {
-            // Deleting at head
-            node *tmp = head;
-            head = head->next;
-            size--;
-            delete tmp;
-            return;
-        }
+//     void deleteAtIndex(int index)
+//     {
+//         if (index == 0)
+//         {
+//             // Deleting at head
+//             node *tmp = head;
+//             head = head->next;
+//             size--;
+//             delete tmp;
+//             return;
+//         }
 
-        node *curr = head, *pre = nullptr;
-        while (curr && index > 0)
-        {
-            pre = curr;
-            curr = curr->next;
-            index--;
-        }
+//         node *curr = head, *pre = nullptr;
+//         while (curr && index > 0)
+//         {
+//             pre = curr;
+//             curr = curr->next;
+//             index--;
+//         }
 
-        if (index == 0 && curr != nullptr)
-        {
-            node *tmp = curr;
-            pre->next = curr->next;
-            size--;
-            delete tmp;
-        }
-    }
-};
+//         if (index == 0 && curr != nullptr)
+//         {
+//             node *tmp = curr;
+//             pre->next = curr->next;
+//             size--;
+//             delete tmp;
+//         }
+//     }
+// };
 
 /**
  * Your MyLinkedList object will be instantiated and called as such:
